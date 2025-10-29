@@ -1,5 +1,5 @@
 import datetime as date
-from blockchain import Block
+from block import Block
 
 
 def create_genesis_block():

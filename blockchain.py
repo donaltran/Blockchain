@@ -1,18 +1,15 @@
-import hashlib as hasher
+from newblock import next_block
+from genesis import create_genesis_block
 
-class Block:
-    def __init__(self, index, time, data, previous_hash):
-        self.index = index
-        self.time = time
-        self.data = data
-        self.previous_hash = previous_hash
-        self.hash = self.hash_block()
+blockchain = [create_genesis_block()]
+previous_block = blockchain[0]
 
-    def hash_block(self):
-        sha = hasher.sha256()
-        sha.update(str(self.index).encode('utf-8') +
-                   str(self.time).encode('utf-8') +
-                   str(self.data).encode('utf-8') +
-                   str(self.previous_hash).encode('utf-8'))
-        return sha.hexdigest()
+blocks_to_add = 1000
+
+for i in range(blocks_to_add):
+    added_block = next_block(previous_block)
+    blockchain.append(added_block)
+    previous_block = added_block
+    print("Block #{} added to blockchain".format(added_block.index))
+    print("Hash: {}\n".format(added_block.hash))
 
