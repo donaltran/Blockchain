@@ -1,0 +1,6 @@
+import datetime as date
+from blockchain import Block
+
+
+def create_genesis_block():
+    return Block(0, date.datetime.now(), "Genesis Block", "0")
